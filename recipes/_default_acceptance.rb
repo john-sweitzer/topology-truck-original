@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: deliver-topology
+# Cookbook Name:: topology-truck
 # Recipe:: _default_acceptance
 #
 # Copyright:: Copyright (c) 2016 ThirdWave Insights, LLC
@@ -7,5 +7,5 @@
 
 # The acceptance stage requires some set up before processing the phases.
 if node['delivery']['change']['stage'] == 'acceptance'
-  include_recipe 'deliver-topology::_default_ssh'
+  include_recipe 'topology-truck::_default_ssh'
 end

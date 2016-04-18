@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: deliver-topology
+# Cookbook Name:: topology-truck
 # Recipe:: default
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.

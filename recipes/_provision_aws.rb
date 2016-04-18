@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: deliver-topology
+# Cookbook Name:: topology-truck
 # Recipe:: _provision_aws
 #
 # Copyright:: Copyright (c) 2016 ThirdWave Insights, LLC
@@ -70,7 +70,7 @@ with_chef_server(
 #  Otherwise the topology details in the attribute file is used.
 
 topology_list = []
-deliver_topo = node['delivery']['config']['deliver-topology']
+deliver_topo = node['delivery']['config']['topology-truck']
 if deliver_topo
   # Retrieve the topology details from data bags in the Chef server...
   deliver_topo['stage_topology'][stage].each do |topology_name|

@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: deliver-topology
+# Cookbook Name:: topology-truck
 # Recipe:: functional
 #
 # Copyright:: Copyright (c) 2016 ThirdWave Insights, LLC

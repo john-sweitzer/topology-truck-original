@@ -1,4 +1,4 @@
-# Cookbook Name:: deliver-topology
+# Cookbook Name:: topology-truck
 # Attributes:: default
 #
 # Copyright:: Copyright (c) 2016 ThirdWave Insights, LLC

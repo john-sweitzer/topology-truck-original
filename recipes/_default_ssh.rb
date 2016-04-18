@@ -1,12 +1,12 @@
 #
-# Cookbook Name:: deliver-topology
+# Cookbook Name:: topology-truck
 # Recipe:: _default_ssh
 #
 # Copyright:: Copyright (c) 2016 ThirdWave Insights, LLC
 # License:: Apache License, Version 2.0
 
 # Setup ssh provisioning  if it is needed
-deliver_topo = node['delivery']['config']['deliver-topology']
+deliver_topo = node['delivery']['config']['topology-truck']
 deliver_using_ssh = deliver_topo['provisioning_driver'] == 'ssh'
 
 chef_gem 'chef-provisioning-ssh' do

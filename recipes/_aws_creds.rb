@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: deliver-topology
+# Cookbook Name:: topology-truck
 # Recipe:: _aws_creds
 #
 # Copyright:: Copyright (c) 2016 ThirdWave Insights, LLC

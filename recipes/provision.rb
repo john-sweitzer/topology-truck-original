@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: deliver-topology
+# Cookbook Name:: topology-truck
 # Recipe:: provision
 #
 # Copyright:: Copyright (c) 2016 ThirdWave Insights, LLC
@@ -11,8 +11,8 @@ include_recipe 'chef-sugar'
 
 load_delivery_chef_config
 
-driver = node['delivery']['config']['deliver-topology']['provisioning_driver']
+driver = node['delivery']['config']['topology-truck']['provisioning_driver']
 
-include_recipe 'deliver-topology::_provision_aws' if driver == 'aws'
-include_recipe 'deliver-topology::_provision_vagrant' if driver == 'vagrant'
-include_recipe 'deliver-topology::_provision_ssh' if driver == 'ssh'
+include_recipe 'topology-truck::_provision_aws' if driver == 'aws'
+include_recipe 'topology-truck::_provision_vagrant' if driver == 'vagrant'
+include_recipe 'topology-truck::_provision_ssh' if driver == 'ssh'
