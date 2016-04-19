@@ -73,7 +73,7 @@ topology_list.each  do |topology|
     # Prepare a new machine/node for a chef client run...
     machine node_details['name'] do
       action [:setup]
-      chef_environment topology_name
+      chef_environment topology['chef_environment']
       attributes node_details['normal']
       converge false
 
