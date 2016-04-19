@@ -9,7 +9,7 @@
 
 include_recipe 'chef-sugar'
 
-load_delivery_chef_config
+# Assumes load_delivery_chef_config has been called to switch to server context...
 
 # Setup up some local variable for frequently used value for cleaner code...
 project = node['delivery']['change']['project']

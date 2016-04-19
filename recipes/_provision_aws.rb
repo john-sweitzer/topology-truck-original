@@ -7,7 +7,7 @@
 
 include_recipe 'chef-sugar'
 
-load_delivery_chef_config
+# Assumes load_delivery_chef_config has been called to switch to server context...
 
 # Decrypt the encryption key that decrypts the database passwords
 # and save that file to disk.
