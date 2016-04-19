@@ -9,7 +9,6 @@
 
 include_recipe 'chef-sugar'
 
-load_delivery_chef_config
 
 driver = node['delivery']['config']['topology-truck']['provisioning_driver']
 
