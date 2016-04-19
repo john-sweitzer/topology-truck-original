@@ -5,7 +5,6 @@
 # Copyright:: Copyright (c) 2016 ThirdWave Insights, LLC
 # License:: Apache License, Version 2.0
 
-# include_recipe 'delivery-truck::provision'
 
 include_recipe 'chef-sugar'
 
