@@ -71,10 +71,8 @@ if node['delivery']['config']['topology-truck']
     Chef::Log.warn("stage_toplogy....    #{stage_topology}")
     Chef::Log.warn("topologies....       #{topologies}")
     
-    
-end
 else
-Chef::Log.warn("Unable to find configuration details for topology-truck so cannot deploy topologies")
+      Chef::Log.warn("Unable to find configuration details for topology-truck so cannot deploy topologies")
 end
 
 if @driver_type.downcase === 'aws'
