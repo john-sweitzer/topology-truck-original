@@ -120,10 +120,9 @@ if topologies
         
         if topo
             topology_list.push(topology)
-        end
         else
-        Chef::Log.warn("Unable to find topology #{topo_name} so cannot configure node")
-    end
+            Chef::Log.warn("Unable to find topology #{topo_name} so cannot configure node")
+        end
     
 end
 
