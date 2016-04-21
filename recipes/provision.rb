@@ -9,38 +9,22 @@ include_recipe 'chef-sugar'
 
 load_delivery_chef_config
 
-# Decrypt the encryption key that decrypts the database passwords
-# and save that file to disk.
-# database_passwords_key = encrypted_data_bag_item_for_environment(
-#  'provisioning-data', 'database_passwords_key'
-# )
-# database_passwords_key_path = File.join(
-#   node['delivery']['workspace']['cache'],
-#   node['delivery']['change']['project']
-# )
-# directory database_passwords_key_path
-# file File.join(database_passwords_key_path, 'database_passwords_key') do
-#   sensitive true
-#   content database_passwords_key['content']
-#   owner node['delivery_builder']['build_user']
-#   group node['delivery_builder']['build_user']
-#   mode '0664'
-# end
 
 # Decrypt the SSH private key Chef provisioning uses to connect to the
 # machine and save the key to disk.
-ssh_key = encrypted_data_bag_item_for_environment(
-  'provisioning-data', 'ssh_key'
-)
-ssh_private_key_path = File.join(node['delivery']['workspace']['cache'], '.ssh')
-directory ssh_private_key_path
-file File.join(ssh_private_key_path, "#{ssh_key['name']}.pem") do
-  sensitive true
-  content ssh_key['private_key']
-  owner node['delivery_builder']['build_user']
-  group node['delivery_builder']['build_user']
-  mode '0600'
-end
+
+#ssh_key = encrypted_data_bag_item_for_environment(
+#  'provisioning-data', 'ssh_key'
+#)
+#ssh_private_key_path = File.join(node['delivery']['workspace']['cache'], '.ssh')
+#directory ssh_private_key_path
+#file File.join(ssh_private_key_path, "#{ssh_key['name']}.pem") do
+#  sensitive true
+#  content ssh_key['private_key']
+#  owner node['delivery_builder']['build_user']
+#  group node['delivery_builder']['build_user']
+#  mode '0600'
+#end
 
 # Setup up some local variable for frequently used values for cleaner code...
 project = node['delivery']['change']['project']
