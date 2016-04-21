@@ -53,14 +53,14 @@ if node['delivery']['config']['topology-truck']
     
     deliver_topo = node['delivery']['config']['topology-truck']
     
-    driver = deliver_topo['driver'] || ''
+    driver = deliver_topo['provision']['driver'] || ''
     if driver
         @driver_type = driver.split(":",2)[0]
         else
         @driver_type = "default"
     end
     
-    machine_options = deliver_topo['machine_options'] || {}
+    machine_options = deliver_topo['provision']['machine_options'] || {}
     stage_topology = deliver_topo['stage_topology'] || {}
     topologies = stage_topology[stage] || []
     
@@ -157,3 +157,12 @@ topology_list.each  do |topology|
     end
   end
 end
+
+current_server = chef_server
+ruby_block 'reset chef server' do
+    block do
+        current_server.unload_server_config
+    end
+end
+
+

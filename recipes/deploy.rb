@@ -115,3 +115,10 @@ topology_list.each  do |topology|
 
   end
 end
+
+
+
+# delivery_push_job "deploy_#{node['delivery']['change']['project']}" do
+#    command 'chef-client'
+#    nodes my_nodes
+# end
