@@ -64,6 +64,13 @@ if node['delivery']['config']['topology-truck']
     stage_topology = deliver_topo['stage_topology'] || {}
     topologies = stage_topology[stage] || []
     
+    Chef::Log.warn("delivery_topo....    #{deliver_topo}")
+    Chef::Log.warn("driver....           #{driver}")
+    Chef::Log.warn("driver_type....      #{@driver_type}")
+    Chef::Log.warn("machine_options      #{machine_options}")
+    Chef::Log.warn("stage_toplogy....    #{stage_topology}")
+    Chef::Log.warn("topologies....       #{topologies}")
+    
     
 end
 else
