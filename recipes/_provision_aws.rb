@@ -81,6 +81,12 @@ with_driver driver
 
 end
 
+if @driver_type.downcase === 'ssh'
+    
+    require 'chef/provisioning/ssh_driver'
+    with_driver driver 
+end
+
 # Specify information about our Chef server.
 # Chef provisioning uses this information to bootstrap the machine.
 with_chef_server(
