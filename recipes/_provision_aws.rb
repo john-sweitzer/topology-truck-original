@@ -42,16 +42,44 @@ file File.join(ssh_private_key_path, "#{ssh_key['name']}.pem") do
   mode '0600'
 end
 
-# Setup up some local variable for frequently used value for cleaner code...
+# Setup up some local variable for frequently used values for cleaner code...
 project = node['delivery']['change']['project']
 stage = node['delivery']['change']['stage']
+
+
+# ...  setup the local variable for the configuration configuration details in the config.json
+
+if node['delivery']['config']['topology-truck']
+    
+    deliver_topo = node['delivery']['config']['topology-truck']
+    
+    driver = deliver_topo['driver'] || ''
+    if driver
+        @driver_type = driver.split(":",2)[0]
+        else
+        @driver_type = "default"
+    end
+    
+    machine_options = deliver_topo['machine_options'] || {}
+    stage_topology = deliver_topo['stage_topology'] || {}
+    topologies = stage_topology[stage] || []
+    
+    
+end
+else
+Chef::Log.warn("Unable to find configuration details for topology-truck so cannot deploy topologies")
+end
+
+if @driver_type.downcase === 'aws'
 
 # Load AWS credentials.
 include_recipe "#{cookbook_name}::_aws_creds"
 
 # Initialize the AWS driver after loading it..
 require 'chef/provisioning/aws_driver'
-with_driver 'aws'
+with_driver driver
+
+end
 
 # Specify information about our Chef server.
 # Chef provisioning uses this information to bootstrap the machine.
@@ -70,23 +98,30 @@ with_chef_server(
 #  Otherwise the topology details in the attribute file is used.
 
 topology_list = []
-deliver_topo = node['delivery']['config']['topology-truck']
-if deliver_topo
-  # Retrieve the topology details from data bags in the Chef server...
-  deliver_topo['stage_topology'][stage].each do |topology_name|
-    Chef::Log.warn("*** TOPOLOGY NAME.............    #{topology_name} ")
-    topology = Chef::DataBagItem.load('topologies', topology_name)
-    topology['name'] = topology_name
-    topology_list.push(topology)
-  end
-else
-  # Use a single node topology
-  topology_list.push(node[project][stage]['topology'])
+
+if topologies
+    # Retrieve the topology details from data bags in the Chef server...
+    topologies.each do |topology_name|
+        
+        Chef::Log.warn("*** TOPOLOGY NAME.............    #{topology_name} ")
+        
+        topo = Topo::Topology.get_topo(topology_name)
+        
+        if topo
+            topology_list.push(topology)
+        end
+        else
+        Chef::Log.warn("Unable to find topology #{topo_name} so cannot configure node")
+    end
+    
 end
 
-stage_aws_mach_opts = node[project][stage]['aws']['config']['machine_options']
+stage_aws_mach_opts = node[project][stage][@driver_type.downcase]['config']['machine_options']
+
+
 # Now we are ready to provision the nodes in each of the topologies
 topology_list.each  do |topology|
+    
   topology_name = topology['name']
 
   # When there are provisioning details in the topology data bag, extract them
@@ -107,11 +142,7 @@ topology_list.each  do |topology|
     # Prepare a new machine / node for a chef client run...
     machine node_details['name'] do
       action [:setup]
-      chef_environment topology_name.downcase
-      attributes node_details['normal']
       converge false
-
-      run_list node_details['run_list']
       add_machine_options bootstrap_options: {
         key_name: ssh_key['name'],
         key_path: ssh_private_key_path
