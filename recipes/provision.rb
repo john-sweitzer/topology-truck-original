@@ -123,7 +123,6 @@ if topologies
         else
             Chef::Log.warn("Unable to find topology #{topo_name} so cannot configure node")
         end
-    
 end
 
 stage_aws_mach_opts = node[project][stage][@driver_type.downcase]['config']['machine_options']
@@ -168,5 +167,5 @@ ruby_block 'reset chef server' do
         current_server.unload_server_config
     end
 end
-
+end
 
