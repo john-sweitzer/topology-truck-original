@@ -103,9 +103,10 @@ if topologies
         topo = Topo::Topology.get_topo(topology_name)
         
         if topo
+            topology['name'] = topology_name   # due to a cheg bug we need to set name attribute
             topology_list.push(topology)
         else
-            Chef::Log.warn("Unable to find topology #{topology_name} so cannot configure node")
+            Chef::Log.warn("Unable to find topology #{topology_name} so cannot privision any nodes.")
         end
 end
 
