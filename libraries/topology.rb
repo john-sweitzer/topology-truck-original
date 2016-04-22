@@ -33,8 +33,6 @@ class Topo
         return nil unless @topos[name]
       end
 
-      @topos[name].blueprint = blueprint if blueprint
-      @topos[name]
     end
 
     def self.load_from_bag(name, item, data_bag)
