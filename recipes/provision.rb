@@ -101,7 +101,7 @@ if topologies
         Chef::Log.warn("*** TOPOLOGY NAME.............    #{topology_name} ")
         
         #   topo = Topo::Topology.get_topo(topology_name)
-        raw_data = Chef::DataBagItem.load(data_bag, item)
+        raw_data = Chef::DataBagItem.load('topologies', topology_name)
         topo = raw_data
         if topo
             topology['name'] = topology_name   # due to a cheg bug we need to set name attribute
