@@ -105,7 +105,7 @@ if topologies
         #raw_data = Chef::DataBagItem.load('topologies', topology_name)
         #topo = raw_data
         
-        if topo
+        if topology
             topology['name'] = topology_name   # due to a cheg bug we need to set name attribute
             topology_list.push(topology)
         else
