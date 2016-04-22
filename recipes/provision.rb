@@ -16,7 +16,7 @@ stage = node['delivery']['change']['stage']
 # Setup local variables for configuration details in the config.json file...
 
  raw_data = node['delivery']['config']['topology-truck']
- config = Config::ConfigurationParameter.new(raw_data.to_hash) if raw_data
+ config = Topo::ConfigurationParameter.new(raw_data.to_hash) if raw_data
 
 Chef::Log.warn("raw_data....    #{raw_data}")
 Chef::Log.warn("driver....           #{config.driver()}")

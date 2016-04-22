@@ -17,7 +17,7 @@
 require 'chef/data_bag_item'
 require_relative './node'
 
-class Config
+class Topo
   # Handle topology data from data bag item
   class ConfigurationParameters
     @config = {}
