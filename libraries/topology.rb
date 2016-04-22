@@ -40,6 +40,7 @@ class Topo
     def self.load_from_bag(name, item, data_bag)
       begin
         raw_data = Chef::DataBagItem.load(data_bag, item)
+        raw_data['name'] = item if raw_data # Restore name attribute because of chef bug
         topo = Topo::Topology.new(name, raw_data.to_hash) if raw_data
       rescue Net::HTTPServerException => e
         raise unless e.to_s =~ /^404/
@@ -57,10 +58,16 @@ class Topo
     end
 
     def nodes
-      return @nodes if @nodes
-      @nodes = @raw_nodes.map do |node_data|
-        Topo::Node.new(inflate_node(node_data))
-      end
+            return @nodes if @nodes
+            @nodes = @raw_nodes.map do |node_data|
+                Topo::Node.new(inflate_node(node_data))
+            end
+    end
+
+
+    def name
+      return @name if @name
+      'error_name_unknown'
     end
 
     # recursive merge that retains all keys

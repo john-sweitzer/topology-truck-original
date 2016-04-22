@@ -106,7 +106,6 @@ if topologies
         #topo = raw_data
         
         if topology
-            topology['name'] = topology_name   # due to a cheg bug we need to set name attribute
             topology_list.push(topology)
         else
             Chef::Log.warn("Unable to find topology #{topology_name} so cannot privision any nodes.")
@@ -119,7 +118,7 @@ stage_aws_mach_opts = node[project][stage][@driver_type.downcase]['config']['mac
 # Now we are ready to provision the nodes in each of the topologies
 topology_list.each  do |topology|
     
-  topology_name = topology['name']
+  topology_name = topology.name() 
 
   # When there are provisioning details in the topology data bag, extract them
   # and load the values into a structure with symbols rather than string hashes
