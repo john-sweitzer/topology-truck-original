@@ -7,7 +7,15 @@
 
 # Setup ssh provisioning  if it is needed
 deliver_topo = node['delivery']['config']['topology-truck']
-deliver_using_ssh = deliver_topo['provisioning_driver'] == 'ssh'
+
+driver = deliver_topo['provision']['driver'] || ''
+if driver
+    @driver_type = driver.split(":",2)[0]
+    else
+    @driver_type = "default"
+end
+
+deliver_using_ssh = @driver_type == 'ssh'
 
 chef_gem 'chef-provisioning-ssh' do
   only_if { deliver_using_ssh }
