@@ -26,14 +26,9 @@ class Topo
     attr_accessor :blueprint
 
     # class method to get or create Topo instance
-    def self.get_topo(name, blueprint = nil, data_bag = 'topologies')
+    def self.get_topo(name, data_bag = 'topologies')
       unless @topos[name]
         @topos[name] = load_from_bag(name, name, data_bag)
-
-        # if specific topology doesnt exist, fallback to blueprint if specified
-        if !@topos[name] && blueprint
-          @topos[name] = load_from_bag(name, blueprint, data_bag)
-        end
 
         return nil unless @topos[name]
       end
