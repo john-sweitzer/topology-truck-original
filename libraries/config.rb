@@ -88,7 +88,7 @@ class Config
     end
 
     def machine_options
-            return @machine_options if @ machine_options
+            return @machine_options if @machine_options
             {}
     end
 
