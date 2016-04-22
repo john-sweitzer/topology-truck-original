@@ -32,6 +32,8 @@ class Topo
 
         return nil unless @topos[name]
       end
+  
+      @topos[name]
 
     end
 
