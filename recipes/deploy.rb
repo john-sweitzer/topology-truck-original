@@ -42,8 +42,6 @@ if node['delivery']['config']['topology-truck']
     stage_topology = deliver_topo['stage_topology'] || {}
     topologies = stage_topology[stage] || []
     
-
-end
 else
     Chef::Log.warn("Unable to find configuration details for topology-truck so cannot deploy topologies")
 end
@@ -78,16 +76,15 @@ if topologies
     
     if topo
          topology_list.push(topology)
-    end
     else
             Chef::Log.warn("Unable to find topology #{topo_name} so cannot configure node")
     end
-  
   end
-
+end
 
 # Now we are ready to provision the nodes in each of the topologies
 topology_list.each  do |topology|
+  
   topology_name = topology['name']
 
   # When there are provisioning details in the topology data bag, extract them
@@ -111,8 +108,6 @@ topology_list.each  do |topology|
         tags node_details['tags'] ig node_details['tags']
         attributes node_details['normal'] if node_details['normal']
     end
-
-
   end
 end
 
