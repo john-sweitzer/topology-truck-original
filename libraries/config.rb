@@ -53,19 +53,17 @@ class Topo
         #  @attributes = @raw_data['attributes'] || @raw_data['normal'] || {}
       
         if @raw_data['provision']
-          
-          
-          driver = @raw_data['provision']['driver'] || ''
-          if driver
+            driver = @raw_data['provision']['driver'] || ''
+            if driver
                 @driver_type = driver.split(":",2)[0]
             else
                 @driver_type = "default"
-                end
-          
-          @machine_options = deliver_topo['provision']['machine_options'] || {}
-          else
-            Chef::Log.warn("Unable to find configuration details for topology-truck so cannot deploy topologies")
             end
+          
+            @machine_options = deliver_topo['provision']['machine_options'] || {}
+        else
+            Chef::Log.warn("Unable to find configuration details for topology-truck so cannot deploy topologies")
+        end
       
       if @raw_data['stage_topology']
           stage_topology = deliver_topo['stage_topology'] || {}
