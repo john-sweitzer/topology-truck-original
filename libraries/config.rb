@@ -48,10 +48,9 @@ class Topo
 
     def initialize(raw_data)
 
-#     @raw_data = raw_data['topology-truck'] || {}
+     Chef::Log.warn("raw_data ...  #{raw_data}")
+     @raw_data = raw_data['topology-truck'] || {}
         
-         @raw_data = raw_data.topology-truck || {}
-    
      Chef::Log.warn("@raw_data ...  #{@raw_data}")
     
         #  @attributes = @raw_data['attributes'] || @raw_data['normal'] || {}
