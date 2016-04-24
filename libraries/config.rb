@@ -52,7 +52,8 @@ class Topo
     
         #  @attributes = @raw_data['attributes'] || @raw_data['normal'] || {}
       
-        if @raw_data['provision']
+        if @raw_data.provision
+            Chef::Log.warn("use dot notation")
             driver = @raw_data['provision']['driver'] || ''
             if driver
                 @driver_type = driver.split(":",2)[0]
