@@ -88,7 +88,7 @@ class Topo
     end
 
     def topologyList
-            return @topologyList if @topologyList
+            return @topologies if @topologies
             []
     end
 
