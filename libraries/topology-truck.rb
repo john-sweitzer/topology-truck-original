@@ -46,7 +46,7 @@ class Topo
       topo
     end
 
-    def initialize(raw_data)
+    def initialize(raw_data, stage = 'acceptance')
      
         @raw_data = raw_data['topology-truck'] || {}
      
@@ -66,9 +66,8 @@ class Topo
       
       if @raw_data['stage_topology']
           stage_topology = @raw_data['stage_topology'] || {}
-          stage = node['delivery']['change']['stage'] || 'acceptance'
           @topologies = stage_topology[stage] || []
-          end
+      end
       
       
     end
