@@ -18,7 +18,8 @@ stage = node['delivery']['change']['stage']
  raw_data = node['delivery']['config']['topology-truck']
  config = Topo::ConfigurationParameter.new(raw_data.to_hash) if raw_data
 
-Chef::Log.warn("raw_data....    #{raw_data}")
+Chef::Log.warn("raw_data....         #{raw_data}")
+Chef::Log.warn("raw_data.to_hash...  #{raw_data.to_hash}")
 Chef::Log.warn("driver....           #{config.driver()}")
 Chef::Log.warn("driver_type....      #{config.driver_type()}")
 Chef::Log.warn("machine_options      #{config.machine_options()}")
