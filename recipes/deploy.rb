@@ -103,10 +103,10 @@ topology_list.each  do |topology|
     )
     
     chef_node node_details['name'] do
-        chef_environment stage.lowercase if stage  #todo: logic for topolgoy environments...
-        run_list node_details['run_list'] if node_details['run_list']
-        tags node_details['tags'] ig node_details['tags']
-        attributes node_details['normal'] if node_details['normal']
+        chef_environment stage.lowercase    if stage  #todo: logic for topolgoy environments...
+        run_list node_details['run_list']   if node_details['run_list']
+        tags node_details['tags']           if node_details['tags']
+        attributes node_details['normal']   if node_details['normal']
     end
   end
 end
