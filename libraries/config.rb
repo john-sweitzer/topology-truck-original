@@ -50,6 +50,8 @@ class Topo
 
         @raw_data = raw_data['topology-truck'] || {}
     
+     Chef::Log.warn("@raw_data ...  #{@raw_data}")
+    
         #  @attributes = @raw_data['attributes'] || @raw_data['normal'] || {}
       
         if @raw_data.provision
