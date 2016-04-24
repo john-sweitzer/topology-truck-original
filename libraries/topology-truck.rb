@@ -59,7 +59,7 @@ class Topo
                 @driver_type = "default"
             end
           
-            @machine_options = r@aw_data['provision']['machine_options'] || {}
+            @machine_options = @raw_data['provision']['machine_options'] || {}
         else
             Chef::Log.warn("Unable to find configuration details for topology-truck so cannot deploy topologies")
         end
