@@ -65,7 +65,7 @@ class Topo
         end
       
       if @raw_data['stage_topology']
-          stage_topology = @raw_data'stage_topology'] || {}
+          stage_topology = @raw_data['stage_topology'] || {}
           stage = node['delivery']['change']['stage'] || 'acceptance'
           @topologies = stage_topology[stage] || []
           end
