@@ -47,14 +47,9 @@ class Topo
     end
 
     def initialize(raw_data)
-
-     Chef::Log.warn("raw_data ...  #{raw_data}")
-     @raw_data = raw_data['topology-truck'] || {}
-        
-     Chef::Log.warn("@raw_data ...  #{@raw_data}")
-    
-        #  @attributes = @raw_data['attributes'] || @raw_data['normal'] || {}
-      
+     
+        @raw_data = raw_data['topology-truck'] || {}
+     
         if @raw_data.provision
             Chef::Log.warn("use dot notation")
             driver = @raw_data['provision']['driver'] || ''
@@ -64,7 +59,7 @@ class Topo
                 @driver_type = "default"
             end
           
-            @machine_options = deliver_topo['provision']['machine_options'] || {}
+            @machine_options = r@aw_data['provision']['machine_options'] || {}
         else
             Chef::Log.warn("Unable to find configuration details for topology-truck so cannot deploy topologies")
         end
