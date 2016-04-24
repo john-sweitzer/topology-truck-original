@@ -51,9 +51,8 @@ class Topo
         @raw_data = raw_data['topology-truck'] || {}
      
         if @raw_data.provision
-            Chef::Log.warn("use dot notation")
-            driver = @raw_data['provision']['driver'] || ''
-            if driver
+            @driver = @raw_data['provision']['driver'] || ''
+            if @driver
                 @driver_type = driver.split(":",2)[0]
             else
                 @driver_type = "default"
