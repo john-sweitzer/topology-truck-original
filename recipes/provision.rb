@@ -122,6 +122,14 @@ debug_config = "log_level :info \n"\
                              
                              
         end
+        
+        # hack...
+        
+        chef_node node_details.name do
+            attribute chef_provisioning, {}
+        end
+        
+        
       end
   end
 
