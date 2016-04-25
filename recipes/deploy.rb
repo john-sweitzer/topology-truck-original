@@ -102,10 +102,10 @@ topology_list.each  do |topology|
 end
 
 
-# delivery_push_job "deploy_#{node['delivery']['change']['project']}" do
-#    command 'chef-client'
-#    nodes my_nodes
-# end
+ delivery_push_job "deploy_#{node['delivery']['change']['project']}" do
+    command 'chef-client'
+    nodes my_nodes
+ end
 
 
 ruby_block "do stuff like delivery truck" do
