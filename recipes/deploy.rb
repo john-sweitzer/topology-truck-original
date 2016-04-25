@@ -100,6 +100,21 @@ topology_list.each  do |topology|
             attributes node_details.attributes     if node_details.attributes
             converge true
             run_list node_details.run_list          if node_details.run_list
+            
+            
+            machine_options(
+                            transport_options: {
+                            'ip_address' => node_details.ssh_host,
+                            'username' => 'vagrant',
+                            'ssh_options' => {
+                            'password' => 'vagrant'
+                            }
+                            },
+                            convergence_options: {
+                            ssl_verify_mode: :verify_none,
+                            chef_config: debug_config
+                            }
+                            )
         end
         
  
