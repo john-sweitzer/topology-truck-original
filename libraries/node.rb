@@ -19,7 +19,7 @@ require 'chef/data_bag_item'
 class Topo
   #
   class Node
-    attr_reader :name, :attributes, :node_type
+    attr_reader :name, :attributes, :node_type, :ssh_host
     attr_reader :chef_environment, :run_list, :tags
 
     def initialize(node_data)
