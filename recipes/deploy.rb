@@ -71,7 +71,6 @@ with_chef_server(
 debug_config = "log_level: :info \n"\
 'verify_api_cert: false'
 
-relevant_nodes = []
 
 # Now we are ready to provision the nodes in each of the topologies
 topology_list.each  do |topology|
@@ -93,23 +92,25 @@ topology_list.each  do |topology|
                        '*** TOPOLOGY NODE(S).............   ' \
                        " #{topology_name} NODE:  #{node_details.name} ip: #{node_details.ssh_host}"
                        )
-                       
-        chef_node node_details.name do
-                chef_environment stage.downcase     if stage  #todo: logic for topolgoy environments...
-                run_list node_details.run_list      if node_details.run_list
-                tags node_details.tags              if node_details.tags
-                attributes node_details.attributes      if node_details.attributes
+               
+        # Prepare a new machine / node for a chef client run...
+        machine node_details.name do
+            action [:converge_only]
+            chef_environment stage.downcase         if stage  #todo: logic for topology environments
+            attributes node_details.attributes     if node_details.attributes
+            converge false
+            run_list node_details.run_list          if node_details.run_list
         end
         
-        relevant_nodes.push(node_details.name)
+ 
     end
 end
 
 
- delivery_push_job "deploy_#{node['delivery']['change']['project']}" do
-    command 'chef-client'
-    nodes relevant_nodes
- end
+# delivery_push_job "deploy_#{node['delivery']['change']['project']}" do
+#    command 'chef-client'
+#    nodes relevant_nodes
+# end
 
 
 ruby_block "do stuff like delivery truck" do
