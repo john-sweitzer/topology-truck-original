@@ -96,11 +96,11 @@ debug_config = "log_level: :info \n"\
           Chef::Log.warn("***node_details....      #{node_details}")
           Chef::Log.warn(
                          '*** TOPOLOGY NODE(S).............   ' \
-                         " #{topology_name} NODE:  #{node_details['name']} ip: #{node_details['ssh_host']}"
+                         " #{topology_name} NODE:  #{node_details.name} ip: #{node_details.ssh_host}"
                          )
                          
         # Prepare a new machine / node for a chef client run...
-        machine node_details['name'] do
+        machine node_details.nam do
             action [:setup]
             converge false
                          
@@ -113,7 +113,7 @@ debug_config = "log_level: :info \n"\
                              
             machine_options(
                     transport_options: {
-                            'ip_address' => node_details['ssh_host'],
+                            'ip_address' => node_details.ssh_host,
                             'username' => 'vagrant',
                             'ssh_options' => {
                                 'password' => 'vagrant'

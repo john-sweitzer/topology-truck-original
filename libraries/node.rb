@@ -26,6 +26,7 @@ class Topo
       @name = node_data['name']
       @chef_environment = node_data['chef_environment']
       @run_list = node_data['run_list']
+      @ssh_host = node_data['ssh_host'] if node_data['ssh_host']
       normalize_attributes(node_data)
     end
 
