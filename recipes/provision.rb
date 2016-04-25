@@ -93,7 +93,7 @@ debug_config = "log_level: :info \n"\
       topology['nodes'].each do |node_details|
           Chef::Log.warn(
                          '*** TOPOLOGY NODE(S).............   ' \
-                         " #{topology_name} NODE:  #{node_details['name'] [ip: #{node_details['ssh_host']}"
+                         " #{topology_name} NODE:  #{node_details['name']} ip: #{node_details['ssh_host']}"
                          )
                          
         # Prepare a new machine / node for a chef client run...
