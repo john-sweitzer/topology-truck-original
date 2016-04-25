@@ -100,11 +100,10 @@ debug_config = "log_level: :info \n"\
                          )
                          
         # Prepare a new machine / node for a chef client run...
-        machine node_details.nam do
+        machine node_details.name do
             action [:setup]
             converge false
-                         
-                         
+            
                          #add_machine_options bootstrap_options: {
                          #        key_name: ssh_key['name'],
                          #        key_path: ssh_private_key_path
