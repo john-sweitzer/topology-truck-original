@@ -68,8 +68,8 @@ with_chef_server(
 # compile-time code here will execute in local chef server context
 
 # arbitrary options to go in client.rb on provisioned nodes
-debug_config = "log_level: :info \n"\
-'verify_api_cert: false'
+debug_config = "log_level :info \n"\
+'verify_api_cert false'
 
 
 # Now we are ready to provision the nodes in each of the topologies
