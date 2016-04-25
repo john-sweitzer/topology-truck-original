@@ -134,26 +134,6 @@ debug_config = "log_level: :info \n"\
   
   #****************************************
   
-
-# actual provisioning using delivery chef server
-machine 'debugnode' do
-  action [:setup]
-  chef_environment '_default'
-  converge false
-  run_list [ 'recipe[yum::default]']
-  machine_options(
-    transport_options: {
-      'ip_address' => '10.0.1.2',
-      'username' => 'vagrant',
-      'ssh_options' => {
-        'password' => 'vagrant'
-      }
-    },
-    convergence_options: {
-      ssl_verify_mode: :verify_none,
-      chef_config: debug_config
-    }
-  )
 end
 
 ruby_block "do stuff like delivery truck" do
