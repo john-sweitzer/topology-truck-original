@@ -73,10 +73,6 @@ with_chef_server(
 debug_config = "log_level: :info \n"\
   'verify_api_cert: false'
   
-  
-  #***************************************
-  
-  
   # Now we are ready to provision the nodes in each of the topologies
   topology_list.each  do |topology|
       
@@ -129,12 +125,7 @@ debug_config = "log_level: :info \n"\
         end
       end
   end
-  
-  
-  
-  #****************************************
-  
-end
+
 
 ruby_block "do stuff like delivery truck" do
   block do
