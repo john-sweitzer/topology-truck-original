@@ -110,7 +110,7 @@ debug_config = "log_level: :info \n"\
                              
             machine_options(
                     transport_options: {
-                            'ip_address' => node_details['ssh_host']
+                            'ip_address' => node_details['ssh_host'],
                             'username' => 'vagrant',
                             'ssh_options' => {
                                 'password' => 'vagrant'
