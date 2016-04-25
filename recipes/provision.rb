@@ -89,7 +89,6 @@ debug_config = "log_level: :info \n"\
       # Provision each node in the current topology...
       topology.nodes.each do |node_details|
           
-          Chef::Log.warn("***node_details....      #{node_details}")
           Chef::Log.warn(
                          '*** TOPOLOGY NODE(S).............   ' \
                          " #{topology_name} NODE:  #{node_details.name} ip: #{node_details.ssh_host}"
