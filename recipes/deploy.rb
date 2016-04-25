@@ -95,8 +95,8 @@ topology_list.each  do |topology|
                
         # Prepare a new machine / node for a chef client run...
         machine node_details.name do
-            action [:converge_only]
-            #action [:converge]
+            #action [:converge_only]
+            action [:converge]
             chef_environment stage.downcase         if stage  #todo: logic for topology environments
             attributes node_details.attributes     if node_details.attributes
             converge true
