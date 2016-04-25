@@ -71,6 +71,8 @@ with_chef_server(
 debug_config = "log_level: :info \n"\
 'verify_api_cert: false'
 
+relevant_nodes = []
+
 # Now we are ready to provision the nodes in each of the topologies
 topology_list.each  do |topology|
     
@@ -98,13 +100,15 @@ topology_list.each  do |topology|
                 tags node_details.tags              if node_details.tags
                 attributes node_details.attributes      if node_details.attributes
         end
+        
+        relevant_nodes.push(node_details.name)
     end
 end
 
 
  delivery_push_job "deploy_#{node['delivery']['change']['project']}" do
     command 'chef-client'
-    nodes my_nodes
+    nodes relevant_nodes
  end
 
 
