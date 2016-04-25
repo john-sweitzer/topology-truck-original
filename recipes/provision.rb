@@ -122,7 +122,11 @@ debug_config = "log_level :info \n"\
                              
         end
         
-        # hack...
+        # hack...to overcome this message....
+        # Cannot move 'buildserver-buildserver-master' from ssh:/var/opt/delivery/workspace/33.33.33.11/ourcompany/
+        #  systemoneteam/mvt/master/acceptance/provision/chef/provisioning/ssh to ssh:/var/opt/delivery/workspace/
+        #  33.33.33.11/ourcompany/systemoneteam/mvt/master/acceptance/deploy/chef/provisioning/ssh: machine moving
+        #  is not supported.  Destroy and recreate.
         
         chef_node node_details.name do
             attribute 'chef_provisioning', {}
