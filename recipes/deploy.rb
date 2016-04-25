@@ -97,7 +97,7 @@ topology_list.each  do |topology|
         machine node_details.name do
             #action [:converge_only]
             action [:converge]
-            chef_environment stage.downcase         if stage  #todo: logic for topology environments
+            chef_environment delivery_environment    #todo: logic for topology environments
             attributes node_details.attributes     if node_details.attributes
             converge true
             run_list node_details.run_list          if node_details.run_list

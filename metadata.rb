@@ -7,4 +7,5 @@ issues_url 'https://github.com/john_sweitzer/topology-truck/issues'
 source_url 'https://github.com/john_sweitzer/topology-truck'
 
 depends 'delivery-truck'
+depends 'delivery-sugar'
 depends 'chef-sugar'

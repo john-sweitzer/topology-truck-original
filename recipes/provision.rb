@@ -8,7 +8,6 @@
 #
 
 
-
 # Setup up some local variable for frequently used values for cleaner code...
 project = node['delivery']['change']['project']
 stage = node['delivery']['change']['stage']
