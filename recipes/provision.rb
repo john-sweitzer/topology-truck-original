@@ -56,6 +56,7 @@ with_server_config do
       else
           Chef::Log.warn("Unable to find topology #{topology_name} so cannot privision any nodes.")
       end
+  end
 end
 
 # Setup info so cheffish/chef provisioning uses delivery chef server
