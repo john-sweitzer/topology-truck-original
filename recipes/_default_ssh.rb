@@ -7,9 +7,10 @@
 
 # Setup ssh provisioning  if it is needed
 
+raw_data = {}
 raw_data['topology-truck'] = node['delivery']['config']['topology-truck']
 
-config = Topo::ConfigurationParameter.new(raw_data.to_hash,stage) if raw_data
+config = Topo::ConfigurationParameter.new(raw_data.to_hash,stage) if raw_data{'topology-truck'
 
 driver = deliver_topo['provision']['driver'] || ''
 if driver
