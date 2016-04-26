@@ -26,9 +26,11 @@ Chef::Log.warn("machine_options      #{config.machine_options()}")
 Chef::Log.warn("topologies....       #{config.topologyList()}")
 
 
-# Initialize the ssh driver after loading it..
-require 'chef/provisioning/ssh_driver'
-with_driver 'ssh'
+# Initialize the provisioning driver after loading it..
+require 'chef/provisioning/ssh_driver' if config.driver_type == 'ssh'
+require 'chef/provisioning/aws_driver' if config.driver_type == 'aws'
+require 'chef/provisioning/vagrant_driver' if config.driver_type == 'vagrant'
+with_driver config.driver
 
 
 #  The recipe is expecting there to be a list of topologies that need machine
@@ -120,6 +122,7 @@ debug_config = "log_level :info \n"\
         
         chef_node node_details.name do
             attribute 'chef_provisioning', {}
+            only_if {config.driver_type == 'ssh' }
         end
         
         
