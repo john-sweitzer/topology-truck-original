@@ -97,13 +97,6 @@ debug_config = "log_level :info \n"\
         machine node_details.name do
             action [:setup]
             converge false
-            
-                         #add_machine_options bootstrap_options: {
-                         #        key_name: ssh_key['name'],
-                         #        key_path: ssh_private_key_path
-                         #    }
-                         #    add_machine_options stage_aws_mach_opts
-                             
             machine_options(
                     transport_options: {
                             'ip_address' => node_details.ssh_host,
@@ -117,9 +110,6 @@ debug_config = "log_level :info \n"\
                             chef_config: debug_config
                     }
             )
-                             
-                             
-                             
         end
         
         # hack...to overcome this message....
