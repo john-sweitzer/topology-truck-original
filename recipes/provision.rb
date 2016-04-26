@@ -99,6 +99,7 @@ debug_config = "log_level :info \n"\
         machine node_details.name do
             action [:setup]
             converge false
+            chef_environment delivery_environment    #todo: logic for topology environments
             machine_options(
                     transport_options: {
                             'ip_address' => node_details.ssh_host,
