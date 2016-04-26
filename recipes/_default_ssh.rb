@@ -10,14 +10,7 @@
 raw_data = {}
 raw_data['topology-truck'] = node['delivery']['config']['topology-truck']
 
-config = Topo::ConfigurationParameter.new(raw_data.to_hash,stage) if raw_data{'topology-truck'
-
-driver = deliver_topo['provision']['driver'] || ''
-if driver
-    @driver_type = driver.split(":",2)[0]
-    else
-    @driver_type = "default"
-end
+config = Topo::ConfigurationParameter.new(raw_data.to_hash,stage) if raw_data['topology-truck']
 
 deliver_using_ssh = config.driver_type == 'ssh' if config
 
