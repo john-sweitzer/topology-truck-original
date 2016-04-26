@@ -5,6 +5,9 @@
 # Copyright:: Copyright (c) 2016 ThirdWave Insights, LLC
 # License:: Apache License, Version 2.0
 
+# Use these local variable in the rest of the recipe to make the code cleaner...
+stage = node['delivery']['change']['stage']
+
 # Setup ssh provisioning  if it is needed
 
 raw_data = {}
