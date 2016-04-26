@@ -6,7 +6,10 @@
 # License:: Apache License, Version 2.0
 
 # Setup ssh provisioning  if it is needed
-deliver_topo = node['delivery']['config']['topology-truck']
+
+raw_data['topology-truck'] = node['delivery']['config']['topology-truck']
+
+config = Topo::ConfigurationParameter.new(raw_data.to_hash,stage) if raw_data
 
 driver = deliver_topo['provision']['driver'] || ''
 if driver
@@ -15,7 +18,7 @@ if driver
     @driver_type = "default"
 end
 
-deliver_using_ssh = @driver_type == 'ssh'
+deliver_using_ssh = config.driver_type == 'ssh' if config
 
 chef_gem 'chef-provisioning-ssh' do
   only_if { deliver_using_ssh }
