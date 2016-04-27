@@ -9,13 +9,19 @@ project = node['delivery']['change']['project']
 %w(acceptance union rehearsal delivered).each do |stage|
   
   default[project][stage]['ssh']['config'] = {
-    machine_options: {
-      transport_options: {
-        'ip_address' => '10.0.1.2',
-        'username' => 'vagrant',
-        'password' => 'vagrant'
+      machine_options: {
+          'transport_options' => {
+              'ip_address' => '10.0.1.2',
+              'username' => 'vagrant',
+              'ssh_options' => {
+                  'password' => 'vagraant'
+              }
+          },
+          'convergence_options' => {
+              'ssl_verify_mode' => :verify_none,
+              'chef_config' => debug_config
+          }
       }
-    }
   }
 
 
@@ -24,19 +30,18 @@ debug_config = "log_level :info \n"\
 'verify_api_cert false'
 
     default[project][stage]['vagrant']['config'] = {
-        machine_options: {
-            'transport_options' => {
-                'ip_address' => '10.9.1.2',
-                'username' => 'vagrant',
-                'ssh_options' => {
-                        'password' => 'vagraaaant'
-                }
+          machine_options: {
+              vagrant_options: {
+                    'vm.box'=> 'opscode-ubuntu-12.4',
+                    'network' => ':private_network, {:ip => '33.33.33.14'}'
+                    'hostname' => 'hostnameone'
+              },
+            convergence_options: {
+                ssl_verify_mode: 'verify_none' #:verify_none
             },
-            'convergence_options' => {
-                    'ssl_verify_mode' => :verify_none,
-                    'chef_config' => debug_config
-            }
-        }
+            transport_address_location: 'private_ip' #:public_ip
+         }
+
     }
 
 
