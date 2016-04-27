@@ -32,9 +32,10 @@ debug_config = "log_level :info \n"\
     default[project][stage]['vagrant']['config'] = {
           machine_options: {
               vagrant_options: {
-                    'vm.box'=> 'opscode-ubuntu-12.4',
-                    'network' => ':private_network, {:ip => '33.33.33.14'}'
-                    'hostname' => 'hostnameone'
+                  #'vm.box'=> 'opscode-ubuntu-12.4',
+                  #  'network' => ':private_network,
+                    # {'ip' => '33.33.33.14'},
+                    # 'hostname' => 'hostnameone'
               },
             convergence_options: {
                 ssl_verify_mode: 'verify_none' #:verify_none
