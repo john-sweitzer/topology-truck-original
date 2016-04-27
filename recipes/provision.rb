@@ -32,7 +32,8 @@ ssh_key = {}
 ssh_key = encrypted_data_bag_item_for_environment('provisioning-data', 'ssh_key') if config.driver_type == 'aws'
 ssh_private_key_path = File.join(node['delivery']['workspace']['cache'], '.ssh') if config.driver_type == 'aws'
 directory ssh_private_key_path if config.driver_type == 'aws'
-file File.join(ssh_private_key_path, "#{ssh_key['name'] || 'noFileToSetup'}.pem") do
+fileName = ssh_key['name'] || 'noFileToSetup'
+file File.join(ssh_private_key_path, "#{fileName}.pem") do
     sensitive true
     content ssh_key['private_key']
     owner node['delivery_builder']['build_user']
