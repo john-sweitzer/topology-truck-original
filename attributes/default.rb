@@ -18,7 +18,7 @@ debug_config = "log_level :info \n"\
               'ip_address' => '10.0.1.2',
               'username' => 'vagrant',
               'ssh_options' => {
-                  'password' => 'vagraant'
+                  'password' => 'vagrant'
               }
           },
           'convergence_options' => {
