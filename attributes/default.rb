@@ -26,10 +26,10 @@ debug_config = "log_level :info \n"\
     default[project][stage]['vagrant']['config'] = {
         machine_options: {
             'transport_options' => {
-                'ip_address' => '10.0.1.2',
+                'ip_address' => '10.9.1.2',
                 'username' => 'vagrant',
                 'ssh_options' => {
-                        'password' => 'vagrant'
+                        'password' => 'vagraaaant'
                 }
             },
             'convergence_options' => {
