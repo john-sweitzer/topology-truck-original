@@ -121,7 +121,7 @@ driver_stage_machine_opts = node[project][stage][config.driver_type]['config']['
       # Provision each node in the current topology...
       topology.nodes.each do |node_details|
           
-          driver_stage_machine_opts.default['transport_options']['ip_address']= node_details.ssh_host
+          #  driver_stage_machine_opts['transport_options']['ip_address']= node_details.ssh_host
           
           Chef::Log.warn(
                          '*** TOPOLOGY NODE(S)...   ' \
