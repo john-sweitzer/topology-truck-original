@@ -4,11 +4,10 @@
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
-project = 'mvt'
-
-default[project]['run_list'] = ['recipe[yum::default]']
+project = node['delivery']['change']['project']
 
 %w(acceptance union rehearsal delivered).each do |stage|
+  
   default[project][stage]['ssh']['config'] = {
     machine_options: {
       transport_options: {
@@ -18,6 +17,24 @@ default[project]['run_list'] = ['recipe[yum::default]']
       }
     }
   }
+
+
+    default[project][stage]['vagrant']['config'] = {
+        machine_options: {
+            transport_options: {
+                'ip_address' => '10.0.1.2',
+                'username' => 'vagrant',
+                'ssh_options' => {
+                        'password' => 'vagrant'
+                }
+            },
+            convergence_options: {
+                    ssl_verify_mode: :verify_none,
+                    chef_config: debug_config
+            }
+        }
+    }
+
 
   default[project][stage]['aws']['config'] = {
     machine_options: {

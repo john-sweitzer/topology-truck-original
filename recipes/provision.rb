@@ -13,9 +13,8 @@ project = node['delivery']['change']['project']
 stage = node['delivery']['change']['stage']
 
 # Setup local variables for configuration details in the config.json file...
-
-    raw_data = {}
-    raw_data['topology-truck'] = node['delivery']['config']['topology-truck']
+raw_data = {}
+raw_data['topology-truck'] = node['delivery']['config']['topology-truck']
 
 config = Topo::ConfigurationParameter.new(raw_data.to_hash,stage) if raw_data['topology-truck']
 
@@ -103,6 +102,8 @@ with_chef_server(
 # arbitrary options to go in client.rb on provisioned nodes
 debug_config = "log_level :info \n"\
   'verify_api_cert false'
+
+driver_stage_machine_opts = node[project][stage][config.driver_type]['config']['machine_options']
   
   # Now we are ready to provision the nodes in each of the topologies
   topology_list.each  do |topology|
@@ -125,23 +126,28 @@ debug_config = "log_level :info \n"\
                          " #{topology_name} NODE:  #{node_details.name}"
                          )
                          
+        Chef::Log.warn(
+                        '*** Machine Options...   ' \
+                        " #{driver_stage_machine_opts} "
+                       )
+                         
         # Prepare a new machine / node for a chef client run...
         machine node_details.name do
             action [:setup]
             converge false
             chef_environment delivery_environment    #todo: logic for topology environments
-            machine_options(
-                    transport_options: {
-                            'ip_address' => node_details.ssh_host,
-                            'username' => 'vagrant',
-                            'ssh_options' => {
-                                'password' => 'vagrant'
-                            }
-                    },
-                    convergence_options: {
-                            ssl_verify_mode: :verify_none,
-                            chef_config: debug_config
-                    }
+            machine_options(driver_stage_machine_opts
+                            # transport_options: {
+                            # 'ip_address' => node_details.ssh_host,
+                            #'username' => 'vagrant',
+                            #'ssh_options' => {
+                            #    'password' => 'vagrant'
+                            #}
+                            #},
+                            # convergence_options: {
+                            #ssl_verify_mode: :verify_none,
+                            #chef_config: debug_config
+                            # }
             )
         end
         
