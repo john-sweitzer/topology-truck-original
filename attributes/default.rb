@@ -14,16 +14,16 @@ debug_config = "log_level :info \n"\
   
   default[project][stage]['ssh']['config'] = {
       machine_options: {
-          'transport_options' => {
+          transport_options: {
               'ip_address' => '10.0.1.2',
               'username' => 'vagrant',
               'ssh_options' => {
                   'password' => 'vagrant'
               }
           },
-          'convergence_options' => {
-              'ssl_verify_mode' => :verify_none,
-              'chef_config' => debug_config
+          convergence_options: {
+              ssl_verify_mode: :verify_none,
+              chef_config: debug_config
           }
       }
   }

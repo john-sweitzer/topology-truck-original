@@ -121,6 +121,8 @@ driver_stage_machine_opts = node[project][stage][config.driver_type]['config']['
       # Provision each node in the current topology...
       topology.nodes.each do |node_details|
           
+          driver_stage_machine_opts['transport_options']['ip_address']= node_details.ssh_host
+          
           Chef::Log.warn(
                          '*** TOPOLOGY NODE(S)...   ' \
                          " #{topology_name} NODE:  #{node_details.name}"
@@ -130,24 +132,26 @@ driver_stage_machine_opts = node[project][stage][config.driver_type]['config']['
                         '*** Machine Options...   ' \
                         " #{driver_stage_machine_opts} "
                        )
-                         
+                       
+                       
+                       
         # Prepare a new machine / node for a chef client run...
         machine node_details.name do
             action [:setup]
             converge false
             chef_environment delivery_environment    #todo: logic for topology environments
-            machine_options( #driver_stage_machine_opts
-                             transport_options: {
-                             'ip_address' => node_details.ssh_host,
-                            'username' => 'vagrant',
-                            'ssh_options' => {
-                                'password' => 'vagrant'
-                            }
-                            },
-                             convergence_options: {
-                            ssl_verify_mode: :verify_none,
-                            chef_config: debug_config
-                             }
+            machine_options( driver_stage_machine_opts
+                            #     transport_options: {
+                            # 'ip_address' => node_details.ssh_host,
+                            #'username' => 'vagrant',
+                            #'ssh_options' => {
+                            #    'password' => 'vagrant'
+                            #}
+                            #},
+                            # convergence_options: {
+                            #ssl_verify_mode: :verify_none,
+                            #chef_config: debug_config
+                            # }
             )
         end
         
