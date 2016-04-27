@@ -30,7 +30,7 @@ Chef::Log.warn("topologies....       #{config.topologyList()}")
 # machine and save the key to disk.
 ssh_key = {}
 ssh_key = encrypted_data_bag_item_for_environment('provisioning-data', 'ssh_key') if config.driver_type == 'aws'
-ssh_private_key_path = File.join(node['delivery']['workspace']['cache'], '.ssh') if config.driver_type == 'aws'
+ssh_private_key_path = File.join(node['delivery']['workspace']['cache'], '.ssh')
 directory ssh_private_key_path if config.driver_type == 'aws'
 fileName = ssh_key['name'] || 'noFileToSetup'
 file File.join(ssh_private_key_path, "#{fileName}.pem") do
