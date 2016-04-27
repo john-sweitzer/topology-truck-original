@@ -22,8 +22,8 @@ debug_config = "log_level :info \n"\
               }
           },
           convergence_options: {
-              ssl_verify_mode: :verify_none,
-              chef_config: debug_config
+              ssl_verify_mode: :verify_none
+              #             chef_config: debug_config
           }
       }
   }
