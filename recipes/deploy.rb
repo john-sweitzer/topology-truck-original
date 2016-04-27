@@ -25,11 +25,39 @@ Chef::Log.warn("machine_options      #{config.machine_options()}")
 Chef::Log.warn("topologies....       #{config.topologyList()}")
 
 
+# Decrypt the SSH private key Chef provisioning uses to connect to the
+# machine and save the key to disk when the driver is aws
+ssh_key = {}
+ssh_key = encrypted_data_bag_item_for_environment('provisioning-data', 'ssh_key') if config.driver_type == 'aws'
+ssh_private_key_path = File.join(node['delivery']['workspace']['cache'], '.ssh')
+directory ssh_private_key_path if config.driver_type == 'aws'
+fileName = ssh_key['name'] || 'noFileToSetup'
+file File.join(ssh_private_key_path, "#{fileName}.pem") do
+    sensitive true
+    content ssh_key['private_key']
+    owner node['delivery_builder']['build_user']
+    group node['delivery_builder']['build_user']
+    mode '0600'
+    only_if {config.driver_type == 'aws'}
+end
+
+# Load AWS credentials.
+include_recipe "#{cookbook_name}::_aws_creds" if config.driver_type == 'aws'
+
+
+
 # Initialize the provisioning driver after loading it..
 require 'chef/provisioning/ssh_driver' if config.driver_type == 'ssh'
 require 'chef/provisioning/aws_driver' if config.driver_type == 'aws'
 require 'chef/provisioning/vagrant_driver' if config.driver_type == 'vagrant'
 with_driver config.driver
+
+if config.driver_type == 'vagrant'
+    vagrant_box 'ubuntu64-12.4' do
+        url 'https://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box'
+        only_if { config.driver_type == 'vagrant'}
+    end
+end
 
 
 #  The recipe is expecting there to be a list of topologies that need machine
@@ -91,8 +119,8 @@ topology_list.each  do |topology|
     topology.nodes.each do |node_details|
         
         Chef::Log.warn(
-                       '*** TOPOLOGY NODE(S).............   ' \
-                       " #{topology_name} NODE:  #{node_details.name} ip: #{node_details.ssh_host}"
+                       '*** TOPOLOGY NODE(S)...   ' \
+                       " #{topology_name} NODE:  #{node_details.name}"
                        )
                
         # Prepare a new machine / node for a chef client run...
