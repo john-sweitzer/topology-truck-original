@@ -53,9 +53,11 @@ require 'chef/provisioning/aws_driver' if config.driver_type == 'aws'
 require 'chef/provisioning/vagrant_driver' if config.driver_type == 'vagrant'
 with_driver config.driver
 
-vagrant_box 'ubuntu64-12.4' do
-    url 'https://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box'
-    only_if { config.driver_type == 'vagrant'}
+if config.driver_type == 'vagrant'
+    vagrant_box 'ubuntu64-12.4' do
+        url 'https://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-14.04_chef-provisionerless.box'
+        only_if { config.driver_type == 'vagrant'}
+    end
 end
 
 
