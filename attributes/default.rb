@@ -6,6 +6,10 @@
 
 project = node['delivery']['change']['project']
 
+# arbitrary options to go in client.rb on provisioned nodes
+debug_config = "log_level :info \n"\
+'verify_api_cert false'
+
 %w(acceptance union rehearsal delivered).each do |stage|
   
   default[project][stage]['ssh']['config'] = {
@@ -25,9 +29,7 @@ project = node['delivery']['change']['project']
   }
 
 
-# arbitrary options to go in client.rb on provisioned nodes
-debug_config = "log_level :info \n"\
-'verify_api_cert false'
+
 
     default[project][stage]['vagrant']['config'] = {
           machine_options: {
